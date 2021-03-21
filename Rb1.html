@@ -1,1 +1,97 @@
-test
+<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->
+<h1 style="color: #5e9ca0;">Collect Diagnostics</h1>
+<h2 style="color: #2e6c80;">Add memory information/</h2>
+<p>SSH into target server(s) and execute the &nbsp;<span style="background-color: #ccffff;"><code>free</code></span> command following command:</p>
+<p style="padding-left: 40px;"><strong>free -m</strong></p>
+<p>Smaple Output:</p>
+<p>total used free shared buff/cache available<br />Mem: 3936 1087 252 130 2596 2427<br />Swap: 0 0 0</p>
+<ul>
+<li><strong>total</strong>&nbsp;- The total amount of memory that can be used by the applications.</li>
+<li><strong>used</strong>&nbsp;- Used memory. It is calculated as:&nbsp;<code>used = total - free - buffers - cache</code></li>
+<li><strong>free</strong>&nbsp;- Free / Unused memory.</li>
+<li><strong>shared</strong>&nbsp;- This column can be ignored; it is shown only for backward compatibility.</li>
+<li><strong>buff/cache</strong>&nbsp;- The combined memory used by the kernel buffers and page cache and slabs. This memory can be reclaimed at any time if needed by the applications.</li>
+<li><strong>available</strong>&nbsp;- An estimate of the memory that is available for starting new applications, without swapping.</li>
+</ul>
+<p>The&nbsp;<code>free</code>&nbsp;command prints information for the physical memory and the&nbsp;<a href="https://linuxize.com/post/create-a-linux-swap-file/">system swap.</a>&nbsp;Paste the contents of the command output inot the the inclident notes.</p>
+<p>&nbsp;</p>
+<h2 style="color: #2e6c80;">Add uptime information/</h2>
+<p>SSH into target server(s) and execute the &nbsp;<span style="background-color: #ccffff;"><code>uptime</code></span> command following command:</p>
+<p style="padding-left: 40px;"><strong>uptime</strong></p>
+<p>Smaple Output:</p>
+<p>22:20:33 up 620 days, 22:37, 1 user, load average: 0.03, 0.10, 0.10</p>
+<ul>
+<li><code>22:20:33</code>&nbsp;- The current system time.</li>
+<li><code>up 620 days, 22:37</code>&nbsp;- The length of time the system has been up.</li>
+<li><code>1 user</code>&nbsp;- The number of logged-in users.</li>
+<li><code>load average: 0.03, 0.10, 0.10</code>&nbsp;- System load averages for the past 1, 5, and 15 minutes.</li>
+</ul>
+<p>The information displayed by&nbsp;<code>uptime</code>&nbsp;is the same as the information contained in the header of the&nbsp;<a href="https://linuxize.com/post/w-command-in-linux/"><code>w</code></a>&nbsp;command.<span id="ezoic-pub-ad-placeholder-156" class="ezoic-adpicker-ad"></span></p>
+<p>&nbsp;</p>
+<h2 style="color: #2e6c80;">Add Process information/</h2>
+<p>SSH into target server(s) and execute the &nbsp;<span style="background-color: #ccffff;"><code>ps</code></span> command following command:</p>
+<p style="padding-left: 40px;"><strong><span style="color: #000000;">ps -A | head</span></strong></p>
+<p>Smaple Output:</p>
+<p>PID TTY TIME CMD<br />1809 pts/0 00:00:00 bash<br />2043 pts/0 00:00:00 ps</p>
+<p>The four columns are labeled&nbsp;<code>PID</code>,&nbsp;<code>TTY</code>,&nbsp;<code>TIME</code>, and&nbsp;<code>CMD</code>.</p>
+<ul>
+<li><code>PID</code>&nbsp;- The process ID. Usually, when running the&nbsp;<code>ps</code>&nbsp;command, the most important information the user is looking for is the process PID. Knowing the PID allows you to&nbsp;<a href="https://linuxize.com/post/how-to-kill-a-process-in-linux/">kill a malfunctioning process</a>&nbsp;.</li>
+<li><code>TTY</code>&nbsp;- The name of the controlling terminal for the process.</li>
+<li><code>TIME</code>&nbsp;- The cumulative CPU time of the process, shown in minutes and seconds.</li>
+<li><code>CMD</code>&nbsp;- The name of the command that was used to start the process.</li>
+</ul>
+<p>&nbsp;</p>
+<h1 style="color: #5e9ca0;">Kubernetes Deplyment (optional)</h1>
+<h2 style="color: #2e6c80;">Run kubectl to create deployment/</h2>
+<h2 id="creating-objects">Create object</h2>
+<p>Kubernetes manifests can be defined in YAML or JSON. The file extension&nbsp;<code>.yaml</code>,&nbsp;<code>.yml</code>, and&nbsp;<code>.json</code>&nbsp;can be used.</p>
+<div class="highlight">
+<pre><code class="language-bash" data-lang="bash">kubectl apply -f ./my-manifest.yaml            # create resource(s)
+kubectl apply -f ./my1.yaml -f ./my2.yaml      # create from multiple files
+kubectl apply -f ./dir                         # create resource(s) in all manifest files in dir
+kubectl apply -f https://git.io/vPieo          # create resource(s) from url
+kubectl create deployment nginx --image=nginx  # start a single instance of nginx
+# create a Job which prints "Hello World"
+kubectl create job hello --image=busybox -- echo "Hello World" 
+# create a CronJob that prints "Hello World" every minute
+kubectl create cronjob hello --image=busybox   --schedule="*/1 * * * *" -- echo "Hello World"    
+kubectl explain pods                           # get the documentation for pod manifests
+# Create multiple YAML objects from stdin
+cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "1000000"
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep-less
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "1000"
+EOF
+# Create a secret with several keys
+cat &lt;&lt;EOF | kubectl apply -f -
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+type: Opaque
+data:
+  password: $(echo -n "s33msi4" | base64 -w0)
+  username: $(echo -n "jane" | base64 -w0)
+EOF
+</code></pre>
+</div>
