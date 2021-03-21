@@ -1,1 +1,74 @@
-test
+<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->
+<h1 style="color: #5e9ca0;">Database Status Evaluation</h1>
+<h2 style="color: #2e6c80;">Check MYSQL logs for errors/</h2>
+<p>SSH into target server(s) and execute the &nbsp;<span style="background-color: #ccffff;"><code>tail</code></span> command following command:</p>
+<h3><span id="Error_log">Error log</span></h3>
+<p>With the above settings, you can display Error log using</p>
+<div class="wp-block-syntaxhighlighter-code ">
+<div>
+<div id="highlighter_798108" class="syntaxhighlighter  bash">
+<table style="height: 18px;" border="0" cellspacing="0" cellpadding="0">
+<tbody>
+<tr style="height: 18px;">
+<td class="gutter" style="height: 18px; width: 9px;">
+<div class="line number1 index0 alt2">1</div>
+</td>
+<td class="code" style="height: 18px; width: 190px;">
+<div class="container">
+<div class="line number1 index0 alt2"><code class="bash functions">tail</code> <code class="bash plain">-f </code><code class="bash plain">/var/log/syslog</code></div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<h2 style="color: #2e6c80;">Check databases disk-space/</h2>
+<p>SSH into target server(s) and execute the &nbsp;<span style="background-color: #ccffff;"><code>df</code></span> command following command:</p>
+<p style="padding-left: 40px;"><strong>df -k</strong></p>
+<p>Smaple Output:</p>
+<p>Filesystem 1K-blocks Used Available Use% Mounted on<br />dev 8172848 0 8172848 0% /dev<br />run 8218640 1696 8216944 1% /run<br />/dev/nvme0n1p3 222284728 183057872 27865672 87% /<br />tmpfs 8218640 150256 8068384 2% /dev/shm<br />tmpfs 8218640 0 8218640 0% /sys/fs/cgroup<br />tmpfs 8218640 24 8218616 1% /tmp<br />/dev/nvme0n1p1 523248 107912 415336 21% /boot<br />/dev/sda1 480588496 172832632 283320260 38% /data<br />tmpfs 1643728 40 1643688 1% /run/user/1000</p>
+<ul>
+<li>&ldquo;Filesystem&rdquo; - The name of the filesystem.</li>
+<li>&ldquo;1K-blocks&rdquo; - The size of the filesystem in 1K blocks.</li>
+<li>&ldquo;Used&rdquo; - The used space in 1K blocks.</li>
+<li>&ldquo;Available&rdquo; - The available space in 1K blocks.</li>
+<li>&ldquo;Use%&rdquo; - The percentage of used space.</li>
+<li>&ldquo;Mounted on&rdquo; the directory on which the filesystem is mounted.</li>
+</ul>
+<p>To display information only for a specific file system, pass its name or the mount point to the&nbsp;<code>df</code>&nbsp;command.<span id="ezoic-pub-ad-placeholder-156" class="ezoic-adpicker-ad"></span><span id="ezoic-pub-ad-placeholder-159" class="ezoic-adpicker-ad"></span></p>
+<h2 style="color: #2e6c80;">Restart MYSQL om Linux/</h2>
+<p>SSH into target server(s) and execute the&nbsp; <span style="background-color: #ccffff;"><code>service</code></span> command following command:</p>
+<p>&nbsp;</p>
+<p>You use the following command to restart the MySQL server On Linux:</p>
+<div class="code-badge-pre">
+<div class="code-badge">
+<div title="Copy to clipboard">&nbsp;</div>
+</div>
+<code class="hljs language-sql">service mysql restart
+</code></div>
+<pre class="wp-block-code" aria-describedby="shcb-language-1" data-shcb-language-name="SQL (Structured Query Language)" data-shcb-language-slug="sql"><small id="shcb-language-1" class="shcb-language"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">SQL (Structured Query Language)</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">sql</span><span class="shcb-language__paren">)</span></small></pre>
+<p>If the name is MySQL service is&nbsp;<code>mysqld</code>&nbsp;not&nbsp;<code>mysql</code>, you need to change the service name in the command as shown in the following command:</p>
+<div class="code-badge-pre">
+<div class="code-badge">
+<div title="Copy to clipboard">&nbsp;</div>
+</div>
+<code class="hljs language-sql">service mysqld restart
+</code></div>
+<pre class="wp-block-code" aria-describedby="shcb-language-2" data-shcb-language-name="SQL (Structured Query Language)" data-shcb-language-slug="sql"><small id="shcb-language-2" class="shcb-language"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">SQL (Structured Query Language)</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">sql</span><span class="shcb-language__paren">)</span></small></pre>
+<p>Or you can use the&nbsp;<code>init.d</code>&nbsp;to start the MySQL service:</p>
+<div class="code-badge-pre">
+<div class="code-badge">
+<div title="Copy to clipboard">&nbsp;</div>
+</div>
+<code class="hljs language-sql"> /etc/init.d/mysqld restart
+</code></div>
+<pre class="wp-block-code" aria-describedby="shcb-language-3" data-shcb-language-name="SQL (Structured Query Language)" data-shcb-language-slug="sql"><small id="shcb-language-3" class="shcb-language"><span class="shcb-language__label">Code language:</span> <span class="shcb-language__name">SQL (Structured Query Language)</span> <span class="shcb-language__paren">(</span><span class="shcb-language__slug">sql</span><span class="shcb-language__paren">)</span></small></pre>
+<p>In this tutorial, you have learned how to restart the MySQL server on Windows and Linux.</p>
+<p>&nbsp;</p>
+<div class="highlight">
+<pre><code class="language-bash" data-lang="bash">
+</code></pre>
+</div>
